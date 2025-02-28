@@ -1,3 +1,8 @@
+# Concepts
+blocks of code evaluate to the last expression in them, and numbers by themselves are also expressions. In this case, the value of the whole if expression depends on which block of code executes. This means the values that have the potential to be results from each arm of the if must be the same type
+
+
+
 # Variables, Constants, Data Types, Shadowing & Mutability
 
 ## Integer Types
@@ -14,7 +19,8 @@ These are usually used for indexing on the respective machines.
 - Floats are always signed.
 - Default is 64 bit.
 
-
+## Boolean type
+Specified using `bool` and such variables can take one of two values `true` or `false`.
 
 ## String
 
@@ -24,6 +30,51 @@ The type that signifies “string slice” is written as `&str`
 
 
 # Control Flows
+
+## If-else
+
+
+- Braces after the condition and before the else are mandatory
+- Parentheses around condition are not necessary. Compiler gives a warning.
+```Rust
+fn main() {
+  let number = 5;
+  if (number%4==0){  
+      println!("Number is divisible by 4");
+  }else if(number%3==0){
+      println!("Number is divisible by 3");
+  }
+  else if(number%2==0){
+      println!("Number is divisible by 2");
+  }else{
+      println!("The Number is not divisible by 4, 3 or 2");
+  }
+}
+```
+
+### Using if in a let statement
+if is an expression not a statement. So it will have a value and that value can be assigned to a variable. This also means that the values returned by each block should be of the same type, so that compiler can determine the type.
+
+```
+let condition = true;
+let number = if condition {5} else {6};
+
+```
+
+
+## Loops
+
+
+### loop
+
+
+
+
+```
+
+
+
+```
 
 
 
