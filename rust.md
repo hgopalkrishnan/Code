@@ -84,9 +84,10 @@ fn first_word_1(s:&String)->usize{
            return i;
        }
     }
-
     return s.len();
 }
+
+
 fn first_word_2(s:&String)->&str{
     let as_bytes = s.as_bytes();
     for (i,&ch) in as_bytes.iter().enumerate(){
@@ -99,6 +100,16 @@ fn first_word_2(s:&String)->&str{
 }
 
 
+fn first_word_3(s:&str)->&str{
+    let as_bytes = s.as_bytes();
+    for (i,&ch) in as_bytes.iter().enumerate(){
+       if ch==b' '{
+           return &s[..i];
+       }
+    }
+
+    return &s[..];
+}
 
 
 ```
