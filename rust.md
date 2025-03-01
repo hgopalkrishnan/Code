@@ -48,17 +48,16 @@ fn main(){
 
 
 
-    /*
-    s1 = String::from("the following just prints an empty string even if index is valid");
-    let mut s2:&str="";
-    let mut idx = 0;
-    let slen = s1.len();
+   s1 = String::from("the following just prints an empty string even if index is valid");
+    let mut idx:usize = 0;
+    let slen:usize = s1.len();
     println!("init length is {slen}");
+    let mut word2 = first_word_3(&s1[idx..slen]);
     while idx<slen {
-        (idx, s2)= next_word(&s1[idx..]);
-       println!("The next word is {s2} at index {idx}");
+        word2 = first_word_3(&s1[idx..]);
+        println!("{0}",word2);
+        idx = idx + word2.len()+1;
     }
-   */ 
 
 }
 
