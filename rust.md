@@ -303,3 +303,22 @@ fn build_user(username:String, email:String)->User{
 - We also cannot have a mutable reference while we have an immutable one to the same value. This is because Users of an immutable reference don’t expect the value to suddenly change out from under them!
 - Multiple immutable references are allowed because no one who is just reading the data has the ability to affect anyone else’s reading of the data.
 - A reference’s scope starts from where it is introduced and continues through the last time that reference is used
+
+
+### Notes for code below
+- When we pass mutable/immutable references we have to prefix `&` or `&mut` to the params in the function call
+- The function signature type annotation will have prefix `&` or `&mut`
+- Inside the function code we can use the variable names with out the prefix `&` or `&mut`
+```Rust
+fn main(){
+    let mut s2 = String::from("hello, ");
+    let s1=String::from("world");
+    
+    append_string(&s1,&mut s2);
+    println!("After appending: {s2}");
+}
+
+fn append_string(s1:&String, s2:&mut String){
+   s2.push_str(s1);
+}
+```
