@@ -163,7 +163,7 @@ let number = if condition {5} else {6};
 
 # Structures
 
-
+## Basics
 
 ```Rust
 struct User{
@@ -212,16 +212,91 @@ fn main(){
    
     println!("Email of user2 after change is:{0}",user2.email);
 }    
+```
+## Returning structs from functions
+
+```Rust
+struct User{
+    active:bool,
+    username:String,
+    email:String,
+    sign_in_count:u64
+}//notice no semi-colon
+
+fn main(){
+    //
+    /*
+    creating instance of a structure
+    notice semicolon at end of `let` statement
+    the values are specified by colon(:) not equal-to(=)
+    
+    
+    */
+    let user1 = build_user(
+        String::from("someusername123"),
+        String::from("someone@example.com")
+    );
+    
+ 
+    println!("Email of user1 is:{0}",user1.email);
+
+    /*
+    creating a mutable instance of a struct
+    Note that the whole structure (all fields) become mutable
+    individual fields cannot be made (im)mutable
+   */
+   
+    let mut user2 = build_user_field_init_shorthand(
+        String::from("someshorthandusername123"),
+        String::from("someshorthandone@example.com")
+    );
+    
+    println!("Email of user2 before change is:{0}",user2.email);
+   //change a value
+   user2.email = String::from("anotheruser@example.com");
+   
+    println!("Email of user2 after change is:{0}",user2.email);
+}    
+
+//Note: names of parameters are EXACTLY the same as field names
+//for which short hand has to be used
+fn build_user_field_init_shorthand(username:String, email:String)->User{
+    User{
+        active:true, 
+        username,
+        email,
+        sign_in_count:0
+    }
+
+}
 
 
 
-
+fn build_user(username:String, email:String)->User{
+    User{
+        active:true, 
+        username:username,
+        email:email,
+        sign_in_count:0
+    }
+    
+    /*
+   The above expression (not ending in ;), is same as the statement
+   
+        let user1=User{
+            active:true, 
+            username:username,
+            email:email,
+            sign_in_count=0;
+        };
+        return user1;
+    */
+}
 
 
 
 
 ```
-
 # Ownership, References, Borrowing, Slicing
 
 - You can have only one mutable reference to a value in a given scope. This prevents _data race_ condition
