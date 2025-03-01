@@ -161,7 +161,66 @@ let number = if condition {5} else {6};
 
 ```
 
+# Structures
 
+
+
+```Rust
+struct User{
+    active:bool,
+    username:String,
+    email:String,
+    sign_in_count:u64
+}//notice no semi-colon
+
+fn main(){
+    //
+    /*
+    creating instance of a structure
+    notice semicolon at end of `let` statement
+    the values are specified by colon(:) not equal-to(=)
+    
+    
+    */
+    let user1 = User{
+        active:true,
+        username:String::from("someusername123"),
+        email:String::from("someone@example.com"),
+        sign_in_count:0
+    };
+    
+    //access using dot operator is not supported in format string
+   // println!("Email of user is:{user1.email}");
+   
+    println!("Email of user is:{0}",user1.email);
+
+    /*
+    creating a mutable instance of a struct
+    Note that the whole structure (all fields) become mutable
+    individual fields cannot be made (im)mutable
+   */
+   let mut user2 = User{
+       active:true,
+       username:String::from("someotheruser"),
+       email:String::from("someotherone@example.com"),
+       sign_in_count:2
+   };
+   
+    println!("Email of user2 before change is:{0}",user2.email);
+   //change a value
+   user2.email = String::from("anotheruser@example.com");
+   
+    println!("Email of user2 after change is:{0}",user2.email);
+}    
+
+
+
+
+
+
+
+
+```
 
 # Ownership, References, Borrowing, Slicing
 
