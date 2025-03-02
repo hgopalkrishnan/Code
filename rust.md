@@ -293,10 +293,94 @@ fn build_user(username:String, email:String)->User{
     */
 }
 
+```
+## Creating new instance of structs
 
 
+
+### 'field init shorthand' in a function
+https://doc.rust-lang.org/book/ch05-01-defining-structs.html#using-the-field-init-shorthand
+
+
+```Rust
+struct User{
+    active:bool,
+    username:String,
+    email:String,
+    sign_in_count:u64
+}//notice no semi-colon
+
+fn main(){
+    let user2 = build_user_field_init_shorthand(
+        String::from("someshorthandusername123"),
+        String::from("someshorthandone@example.com")
+    );
+
+    println!("Email of user2  is:{0}",user2.email);
+}    
+
+//Note: names of parameters are EXACTLY the same as field names
+//for which short hand has to be used
+fn build_user_field_init_shorthand(username:String, email:String)->User{
+    User{
+        active:true, 
+        username,
+        email,
+        sign_in_count:0
+    }
+}
 
 ```
+
+
+### 'struct update' syntax 
+
+The syntax `..` specifies that the remaining fields (of user2) not explicitly set should have the same value as the fields in the given instance(user1).
+
+
+```Rust
+
+fn main(){
+    let user1 = User {
+        active: true,
+        username: String::from("someusername123"),
+        email: String::from("someone@example.com"),
+        sign_in_count: 1,
+    };
+    
+    let user3 = User {
+        email: String::from("someone@example3.com"),
+        ..user2
+    };
+    
+    println!("{0}, {1}",user3.email,user3.username);    
+}
+```
+
+### Regular method
+In below code, we are explicitly setting each field of the instance `user2`, from values of instance `user1` even when only the email has to be updated.
+
+```Rust
+fn main(){
+    let user1 = User {
+        active: true,
+        username: String::from("someusername123"),
+        email: String::from("someone@example.com"),
+        sign_in_count: 1,
+    };
+     
+    let user2 = User {
+        active: user1.active,
+        username: user1.username,   //Note: being a string, the value is moved. user1.username is now empty
+        email: String::from("someone@example2.com"),
+        sign_in_count: user1.sign_in_count,
+    };
+
+    println!("{0}, {1}",user2.email,user2.username);
+}
+```
+
+
 # Ownership, References, Borrowing, Slicing
 
 - You can have only one mutable reference to a value in a given scope. This prevents _data race_ condition
